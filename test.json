@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "5945d430-0e4f-4adf-aece-35660442691a",
+		"name": "测试用例",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "营业性演出",
+			"item": [
+				{
+					"name": "营利性演出",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8a2e8a72-a5ca-4864-b173-4729314209b4",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"成功\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"那本次引导到此结束，祝您生活愉快！\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileName",
+									"value": "营业性演出国内许可",
+									"type": "text"
+								},
+								{
+									"key": "str",
+									"value": "我要办营业性演出国内许可-{{one}}-{{two}}-{{three}}-{{four}}-{{five}}-{{six}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://139.219.141.192:8089/test/byCase",
+							"protocol": "http",
+							"host": [
+								"139",
+								"219",
+								"141",
+								"192"
+							],
+							"port": "8089",
+							"path": [
+								"test",
+								"byCase"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "继承target",
+			"item": [
+				{
+					"name": "继承target的测试",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aa1a14a1-67f9-4707-95a2-aaa7f7cdf785",
+								"type": "text/javascript",
+								"exec": [
+									"var answer=data.answer;",
+									"pm.environment.set(\"answer\", answer);",
+									"var query=data.query;",
+									"pm.environment.set(\"query\", query);",
+									"",
+									"",
+									"//var data = JSON.parse(responseBody);",
+									"//console.log('111'+data.info.ask)",
+									"var data = JSON.parse(responseBody);",
+									"//tests[\"成功匹配\"] = data.info.ask === answer;",
+									"if(data.info.ask === answer){",
+									"        tests[\"测试通过\"]=true;",
+									"    }else{",
+									"        tests[\"测试不通过\"+\"(输入参数\"+query+\")预期结果（ask=\"+answer]=false;}",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c11cc502-a226-43f3-b665-565496e4230b",
+								"type": "text/javascript",
+								"exec": [
+									"var numTime=new Date();",
+									"var nums=Number(numTime.getTime()/100000);",
+									"var userId=nums.toFixed(0)",
+									"pm.environment.set(\"user\", userId);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\":\"{{query}}\",\"userId\":\"{{user}}\"\n}"
+						},
+						"url": {
+							"raw": "http://40.125.160.143:3100/query",
+							"protocol": "http",
+							"host": [
+								"40",
+								"125",
+								"160",
+								"143"
+							],
+							"port": "3100",
+							"path": [
+								"query"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "继承target的测试",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=UTF-8",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"query\":\"{{query}}\",\"userId\":\"{{user}}\"\n}"
+								},
+								"url": {
+									"raw": "http://40.125.160.143:3100/query",
+									"protocol": "http",
+									"host": [
+										"40",
+										"125",
+										"160",
+										"143"
+									],
+									"port": "3100",
+									"path": [
+										"query"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "51",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Sep 2018 05:01:57 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/5.0.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"state\": \"10000\", \"info\": {\"ask\": \"\", \"hint\": {}}}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "默认出定义和退化所属类",
+			"item": [
+				{
+					"name": "默认出定义+退化所属类",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "80c7a257-751a-4fd6-9295-7e6a3a80e267",
+								"type": "text/javascript",
+								"exec": [
+									"var answer=data.answer;",
+									"pm.environment.set(\"answer\", answer);",
+									"var query=data.query;",
+									"pm.environment.set(\"query\", query);",
+									"",
+									"",
+									"//var data = JSON.parse(responseBody);",
+									"//console.log('111'+data.info.ask)",
+									"var data = JSON.parse(responseBody);",
+									"//tests[\"成功匹配\"] = data.info.ask === answer;",
+									"if(data.info.ask === answer){",
+									"        tests[\"测试通过\"]=true;",
+									"    }else{",
+									"        tests[\"测试不通过\"+\"   问：\"+query+\"\\n答：\"+answer]=false;}",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5aa47ffc-afcb-4517-a3b3-c5e71a099aab",
+								"type": "text/javascript",
+								"exec": [
+									"var query=data.query;",
+									"pm.environment.set(\"query\", query);",
+									"var numTime=new Date();",
+									"var nums=Number(numTime.getTime()/100000);",
+									"var userId=nums.toFixed(0);",
+									"pm.environment.set(\"user\", userId);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\":\"{{query}}\",\"userId\":\"{{user}}\"\n}"
+						},
+						"url": {
+							"raw": "http://40.125.160.143:3100/query",
+							"protocol": "http",
+							"host": [
+								"40",
+								"125",
+								"160",
+								"143"
+							],
+							"port": "3100",
+							"path": [
+								"query"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "多轮跳转",
+			"item": [
+				{
+					"name": "默认出定义+退化所属类",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "80c7a257-751a-4fd6-9295-7e6a3a80e267",
+								"type": "text/javascript",
+								"exec": [
+									"var answer=data.answer;",
+									"pm.environment.set(\"answer\", answer);",
+									"var query=data.query;",
+									"pm.environment.set(\"query\", query);",
+									"",
+									"",
+									"//var data = JSON.parse(responseBody);",
+									"//console.log('111'+data.info.ask)",
+									"var data = JSON.parse(responseBody);",
+									"//tests[\"成功匹配\"] = data.info.ask === answer;",
+									"if(data.info.ask === answer){",
+									"        tests[\"测试通过\"]=true;",
+									"    }else{",
+									"        tests[\"测试不通过\"+\"   问：\"+query+\"\\n答：\"+answer]=false;}",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5aa47ffc-afcb-4517-a3b3-c5e71a099aab",
+								"type": "text/javascript",
+								"exec": [
+									"var query=data.query;",
+									"pm.environment.set(\"query\", query);",
+									"var numTime=new Date();",
+									"var nums=Number(numTime.getTime()/100000);",
+									"var userId=nums.toFixed(0);",
+									"pm.environment.set(\"user\", userId);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\":\"{{query}}\",\"userId\":\"{{user}}\"\n}"
+						},
+						"url": {
+							"raw": "http://40.125.160.143:3100/query",
+							"protocol": "http",
+							"host": [
+								"40",
+								"125",
+								"160",
+								"143"
+							],
+							"port": "3100",
+							"path": [
+								"query"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
